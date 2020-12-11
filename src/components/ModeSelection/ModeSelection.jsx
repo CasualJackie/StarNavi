@@ -10,7 +10,7 @@ export const ModeSelection = memo(({
   setHistoryHover,
 }) => {
   const [modes, setModes] = useState([]);
-  const [disableStatus, setDisableStatus] = useState(true);
+  const [disabledStatus, setDisabledStatus] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,10 +28,10 @@ export const ModeSelection = memo(({
 
     if (value === 'Pick mode') {
       setOpenSquare(false);
-      setDisableStatus(true);
+      setDisabledStatus(true);
       setHistoryHover([]);
     } else {
-      setDisableStatus(false);
+      setDisabledStatus(false);
       setHistoryHover([]);
     }
 
@@ -66,11 +66,11 @@ export const ModeSelection = memo(({
 
       <button
         className={ClassName('form__button', {
-          'form__button--disabled': disableStatus,
+          'form__button--disabled': disabledStatus,
         })}
         type="button"
         onClick={handleButton}
-        disabled={disableStatus}
+        disabled={disabledStatus}
       >
         START
       </button>
