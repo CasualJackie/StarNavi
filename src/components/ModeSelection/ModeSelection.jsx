@@ -23,18 +23,15 @@ export const ModeSelection = memo(({
     fetchData();
   }, []);
 
-  const handleChange = useCallback((event) => {
+  const handleSelect = useCallback((event) => {
     const { value } = event.target;
 
-    if (value === 'Pick mode') {
-      setOpenSquare(false);
-      setDisabledStatus(true);
-      setHistoryHover([]);
-    } else {
-      setDisabledStatus(false);
-      setHistoryHover([]);
-    }
+    value === 'Pick mode'
+      ? setDisabledStatus(true)
+      : setDisabledStatus(false);
 
+    setOpenSquare(false);
+    setHistoryHover([]);
     loadField(value);
   }, []);
 
@@ -54,7 +51,7 @@ export const ModeSelection = memo(({
 
   return (
     <form className="form">
-      <select className="form__select" onChange={handleChange}>
+      <select className="form__select" onChange={handleSelect}>
         <option>Pick mode</option>
 
         {modes.map(mode => (
