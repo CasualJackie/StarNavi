@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/index.scss","webpack://src/App.scss"],"names":[],"mappings":"AAAA,EACE,qBAAsB,CACvB,KAGC,QAAS,CCLX,KACE,YAAa,CACb,WAAY,CAFd,OAKI,iBAAkB","file":"main.5602598f.chunk.css","sourcesContent":["* {\n  box-sizing: border-box;\n}\n\nbody {\n  margin: 0;\n}\n",".nav {\n  display: flex;\n  margin: 20px;\n\n  * {\n    margin-right: 10px;\n  }\n}\n"]}
