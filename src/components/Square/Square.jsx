@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { memo, useCallback } from 'react';
 import './Square.scss';
-import { SquareShape } from '../../shapes/SquareShape';
+import { SquareShape } from './SquareShape';
 
-export const Square = ({ field, historyHover, setHistoryHover }) => {
-  const handleHover = (event) => {
+export const Square = memo(({ field, historyHover, setHistoryHover }) => {
+  const handleHover = useCallback((event) => {
     const { target } = event;
 
     setHistoryHover([...historyHover, target.dataset.place]);
-  };
+  }, [historyHover]);
 
   return (
     <div className="square">
@@ -17,7 +17,7 @@ export const Square = ({ field, historyHover, setHistoryHover }) => {
             // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
             <button
               className="square__item"
-              key={square}
+              key={row + square}
               type="button"
               data-place={`row ${row} col ${square}`}
               onMouseOver={handleHover}
@@ -27,6 +27,6 @@ export const Square = ({ field, historyHover, setHistoryHover }) => {
       ))}
     </div>
   );
-};
+});
 
 Square.propTypes = SquareShape;
