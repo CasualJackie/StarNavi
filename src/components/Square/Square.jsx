@@ -16,7 +16,7 @@ export const Square = memo(({ field, historyHover, setHistoryHover }) => {
       id: uuidv4(),
     };
 
-    setHistoryHover([...historyHover, coordinates]);
+    setHistoryHover([coordinates, ...historyHover]);
   }, [historyHover]);
 
   return (
