@@ -13,11 +13,18 @@
     color: white;
     background-color: #0075D8;
     border-radius: 5px;
-
     cursor: pointer;
+
+    &:hover {
+      background-color: #108bef;
+    }
 
     &--disabled {
       background-color: gray;
+
+      &:hover {
+        background-color: #999494;
+      }
     }
   }
 }

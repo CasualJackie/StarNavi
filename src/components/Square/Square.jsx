@@ -1,28 +1,42 @@
 import React, { memo, useCallback } from 'react';
 import './Square.scss';
+import { v4 as uuidv4 } from 'uuid';
 import { SquareShape } from './SquareShape';
 
 export const Square = memo(({ field, historyHover, setHistoryHover }) => {
   const handleHover = useCallback((event) => {
-    const { target } = event;
+    const { place } = event.target.dataset;
 
-    setHistoryHover([...historyHover, target.dataset.place]);
+    if (event.type === 'focus') {
+      return;
+    }
+
+    const coordinates = {
+      point: place,
+      id: uuidv4(),
+    };
+
+    setHistoryHover([...historyHover, coordinates]);
   }, [historyHover]);
 
   return (
     <div className="square">
       {field.map(row => (
-        <div key={row} className="square__row">
-          {field.map(square => (
-            // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
-            <button
-              className="square__item"
-              key={row + square}
-              type="button"
-              data-place={`row ${row} col ${square}`}
-              onMouseOver={handleHover}
-            />
-          ))}
+        <div key={row.id} className="square__row">
+          {field.map((square, index) => {
+            const key = row.id + index;
+
+            return (
+              <button
+                className="square__item"
+                key={key}
+                type="button"
+                data-place={`row ${row.value} col ${square.value}`}
+                onMouseOver={handleHover}
+                onFocus={handleHover}
+              />
+            );
+          })}
         </div>
       ))}
     </div>

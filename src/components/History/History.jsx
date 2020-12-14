@@ -5,8 +5,8 @@ import { HistoryShape } from './HistoryShape';
 export const History = memo(({ historyHover }) => (
   <div className="history">
     <h3 className="history__title">History</h3>
-    {historyHover.map(item => (
-      <div key={item} className="history__item">{item}</div>
+    {historyHover.map(({ point, id }) => (
+      <div key={id} className="history__item">{point}</div>
     ))}
   </div>
 ));

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, memo, useCallback } from 'react';
 import './ModeSelection.scss';
 import ClassName from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 import { ModeSelectionShape } from './ModeSelectionShape';
 import { loadData } from '../../api/getData';
 
@@ -8,16 +9,21 @@ export const ModeSelection = memo(({
   setField,
   setOpenSquare,
   setHistoryHover,
+  setLoadingError,
 }) => {
   const [modes, setModes] = useState([]);
   const [disabledStatus, setDisabledStatus] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await loadData();
-      const result = Object.entries(response);
+      try {
+        const response = await loadData();
+        const result = Object.entries(response);
 
-      setModes(result);
+        setModes(result);
+      } catch {
+        setLoadingError(true);
+      }
     }
 
     fetchData();
@@ -43,7 +49,10 @@ export const ModeSelection = memo(({
     const squares = [];
 
     for (let i = 1; i <= numberOfCells; i += 1) {
-      squares.push(i);
+      squares.push({
+        value: i,
+        id: uuidv4(),
+      });
     }
 
     setField(squares);

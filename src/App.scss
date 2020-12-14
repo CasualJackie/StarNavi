@@ -1,7 +1,12 @@
 .container {
   margin: 1%;
 
+  &__error {
+    color: #E25544;
+  }
+
   &__main {
     display: flex;
+    flex-wrap: wrap;
   }
 }

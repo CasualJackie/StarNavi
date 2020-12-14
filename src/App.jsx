@@ -8,6 +8,7 @@ export const App = () => {
   const [field, setField] = useState([]);
   const [historyHover, setHistoryHover] = useState([]);
   const [openSquare, setOpenSquare] = useState(false);
+  const [loadingError, setLoadingError] = useState(false);
 
   return (
     <div className="container">
@@ -15,7 +16,14 @@ export const App = () => {
         setField={setField}
         setOpenSquare={setOpenSquare}
         setHistoryHover={setHistoryHover}
+        setLoadingError={setLoadingError}
       />
+
+      {loadingError && (
+        <div className="container__error">
+          Failed to load data. Reload the page!
+        </div>
+      )}
 
       {openSquare && (
         <div className="container__main">
