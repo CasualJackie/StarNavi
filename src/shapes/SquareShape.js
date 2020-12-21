@@ -5,9 +5,5 @@ export const SquareShape = {
     value: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
   })).isRequired,
-  historyHover: PropTypes.arrayOf(PropTypes.shape({
-    point: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  })).isRequired,
   setHistoryHover: PropTypes.func.isRequired,
 }.isRequired;

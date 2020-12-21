@@ -1,9 +1,9 @@
 import React, { useState, useEffect, memo, useCallback } from 'react';
 import './ModeSelection.scss';
 import ClassName from 'classnames';
-import { v4 as uuidv4 } from 'uuid';
-import { ModeSelectionShape } from './ModeSelectionShape';
+import { ModeSelectionShape } from '../../shapes/ModeSelectionShape';
 import { loadData } from '../../api/getData';
+import { createField } from '../../helpers/createField';
 
 export const ModeSelection = memo(({
   setField,
@@ -14,19 +14,16 @@ export const ModeSelection = memo(({
   const [modes, setModes] = useState([]);
   const [disabledStatus, setDisabledStatus] = useState(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await loadData();
-        const result = Object.entries(response);
+  useEffect(async() => {
+    try {
+      const response = await loadData();
+      const result = Object.entries(response);
 
-        setModes(result);
-      } catch {
-        setLoadingError(true);
-      }
+      setModes(result);
+      setLoadingError(false);
+    } catch {
+      setLoadingError(true);
     }
-
-    fetchData();
   }, []);
 
   const handleSelect = useCallback((event) => {
@@ -38,24 +35,14 @@ export const ModeSelection = memo(({
 
     setOpenSquare(false);
     setHistoryHover([]);
-    loadField(value);
+
+    const field = createField(value);
+
+    setField(field);
   }, []);
 
   const handleButton = useCallback(() => {
     setOpenSquare(true);
-  }, []);
-
-  const loadField = useCallback((numberOfCells) => {
-    const squares = [];
-
-    for (let i = 1; i <= numberOfCells; i += 1) {
-      squares.push({
-        value: i,
-        id: uuidv4(),
-      });
-    }
-
-    setField(squares);
   }, []);
 
   return (

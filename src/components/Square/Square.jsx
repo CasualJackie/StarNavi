@@ -1,9 +1,10 @@
 import React, { memo, useCallback } from 'react';
 import './Square.scss';
 import { v4 as uuidv4 } from 'uuid';
-import { SquareShape } from './SquareShape';
+import { SquareShape } from '../../shapes/SquareShape';
+import { Cell } from '../Cell/Cell';
 
-export const Square = memo(({ field, historyHover, setHistoryHover }) => {
+export const Square = memo(({ field, setHistoryHover }) => {
   const handleHover = useCallback((event) => {
     const { place } = event.target.dataset;
 
@@ -16,8 +17,11 @@ export const Square = memo(({ field, historyHover, setHistoryHover }) => {
       id: uuidv4(),
     };
 
-    setHistoryHover([coordinates, ...historyHover]);
-  }, [historyHover]);
+    setHistoryHover(previous => ([
+      coordinates,
+      ...previous,
+    ]));
+  }, []);
 
   return (
     <div className="square">
@@ -27,13 +31,11 @@ export const Square = memo(({ field, historyHover, setHistoryHover }) => {
             const key = row.id + index;
 
             return (
-              <button
-                className="square__item"
+              <Cell
                 key={key}
-                type="button"
-                data-place={`row ${row.value} col ${square.value}`}
-                onMouseOver={handleHover}
-                onFocus={handleHover}
+                row={row}
+                square={square}
+                handleHover={handleHover}
               />
             );
           })}

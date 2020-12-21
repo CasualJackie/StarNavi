@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import './History.scss';
-import { HistoryShape } from './HistoryShape';
+import { HistoryShape } from '../../shapes/HistoryShape';
 
 export const History = memo(({ historyHover }) => (
   <div className="history">
