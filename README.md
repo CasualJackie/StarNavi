@@ -11,7 +11,6 @@
 * react-dom 17.0.1 and higher
 * react-scripts 4.0.0 and higher
 * classnames 2.2.6 and higher
-* prop-types 15.7.2 and higher
 * uuid 8.3.2 and higher
 * web-vitals 0.2.4 and higher
 
